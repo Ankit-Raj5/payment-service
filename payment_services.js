@@ -31,6 +31,7 @@ export const createOrder = async (amount, currency, receipt) => {
 
 
 export const verifyPayment = (razorpay_order_id, razorpay_payment_id, razorpay_signature) => {
+  const key_secret = process.env.SECRET_KEY
   const hmac = crypto.createHmac('sha256', key_secret);
   hmac.update(razorpay_order_id + '|' + razorpay_payment_id);
   const generated_signature = hmac.digest('hex');
